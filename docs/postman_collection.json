@@ -1,0 +1,130 @@
+{
+  "info": {
+    "_postman_id": "4e738aa1-d922-4916-8316-ff26ddbcfa7f",
+    "name": "Wallet System gRPC",
+    "description": "gRPC API collection for the Wallet & User microservices. \n\n**Note for Postman:** Since this is a gRPC system, make sure to create a **New > gRPC Request** in Postman, enter the server URL (`localhost:5001` for User, `localhost:5002` for Wallet), and import the `.proto` files located in the `packages/proto` directory for automatic autocomplete and structure mapping.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "User Service",
+      "item": [
+        {
+          "name": "1. Create User",
+          "request": {
+            "method": "INVOKE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"test@example.com\",\n    \"name\": \"Jane Doe\"\n}"
+            },
+            "url": {
+              "raw": "localhost:5001/user.UserService/CreateUser",
+              "host": ["localhost"],
+              "port": "5001",
+              "path": ["user.UserService", "CreateUser"]
+            },
+            "description": "Requires importing `packages/proto/user.proto` into your Postman gRPC API definition."
+          },
+          "response": []
+        },
+        {
+          "name": "2. Get User By Id",
+          "request": {
+            "method": "INVOKE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": \"<INSERT_USER_ID_HERE>\"\n}"
+            },
+            "url": {
+              "raw": "localhost:5001/user.UserService/GetUserById",
+              "host": ["localhost"],
+              "port": "5001",
+              "path": ["user.UserService", "GetUserById"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Wallet Service",
+      "item": [
+        {
+          "name": "3. Create Wallet",
+          "request": {
+            "method": "INVOKE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"userId\": \"<INSERT_USER_ID_HERE>\"\n}"
+            },
+            "url": {
+              "raw": "localhost:5002/wallet.WalletService/CreateWallet",
+              "host": ["localhost"],
+              "port": "5002",
+              "path": ["wallet.WalletService", "CreateWallet"]
+            },
+            "description": "Requires importing `packages/proto/wallet.proto` into your Postman gRPC API definition."
+          },
+          "response": []
+        },
+        {
+          "name": "4. Credit Wallet",
+          "request": {
+            "method": "INVOKE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"userId\": \"<INSERT_USER_ID_HERE>\",\n    \"amount\": 1000\n}"
+            },
+            "url": {
+              "raw": "localhost:5002/wallet.WalletService/CreditWallet",
+              "host": ["localhost"],
+              "port": "5002",
+              "path": ["wallet.WalletService", "CreditWallet"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "5. Debit Wallet",
+          "request": {
+            "method": "INVOKE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"userId\": \"<INSERT_USER_ID_HERE>\",\n    \"amount\": 250\n}"
+            },
+            "url": {
+              "raw": "localhost:5002/wallet.WalletService/DebitWallet",
+              "host": ["localhost"],
+              "port": "5002",
+              "path": ["wallet.WalletService", "DebitWallet"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "6. Get Wallet",
+          "request": {
+            "method": "INVOKE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"userId\": \"<INSERT_USER_ID_HERE>\"\n}"
+            },
+            "url": {
+              "raw": "localhost:5002/wallet.WalletService/GetWallet",
+              "host": ["localhost"],
+              "port": "5002",
+              "path": ["wallet.WalletService", "GetWallet"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

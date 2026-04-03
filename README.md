@@ -232,6 +232,17 @@ grpcurl -plaintext \
 
 See `docs/grpcurl-examples.md` for full error-case examples.
 
+### Option 3: Postman Collection
+I have included a ready-to-import Postman Collection that maps the gRPC payloads.
+
+File: `docs/postman_collection.json`
+
+**To use it in Postman:**
+1. Import `docs/postman_collection.json` into Postman.
+2. Since these are gRPC calls, Postman might ask for the Server URL and the `.proto` structure.
+3. Make sure you select **New > gRPC Request**.
+4. To get autocomplete and proper data validation in Postman, navigate to **Service Definition > Import a .proto file** and select `packages/proto/user.proto` or `packages/proto/wallet.proto`.
+
 ---
 
 ## Bonus Features Implemented
