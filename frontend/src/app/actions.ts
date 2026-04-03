@@ -32,18 +32,28 @@ const walletProto = grpc.loadPackageDefinition(walletPackageDef).wallet as any;
 // ─── Create clients ──────────────────────────────────────────────────────────
 
 // In production on render, these will be set to the Render URLs via Vercel env vars
-const userServiceUrl = process.env.USER_SERVICE_URL || "localhost:5001";
-const walletServiceUrl = process.env.WALLET_SERVICE_URL || "localhost:5002";
+// Note: We strip 'https://' because gRPC expects a raw hostname
+const formatUrl = (url: string) => url.replace("https://", "").replace("http://", "");
 
-// Next.js caches module scope in development usually, but be careful with gRPC clients
+const userServiceUrl = formatUrl(process.env.USER_SERVICE_URL || "127.0.0.1:5001");
+const walletServiceUrl = formatUrl(process.env.WALLET_SERVICE_URL || "127.0.0.1:5002");
+
+// Determine if we should use SSL based on the URL (render uses SSL)
+const getCredentials = (url: string) => {
+  if (url.includes("onrender.com") || !url.includes("127.0.0.1")) {
+    return grpc.credentials.createSsl();
+  }
+  return grpc.credentials.createInsecure();
+};
+
 const userClient = new userProto.UserService(
   userServiceUrl,
-  grpc.credentials.createInsecure() // In a real prod it would be createSsl() for secure gRPC
+  getCredentials(userServiceUrl)
 );
 
 const walletClient = new walletProto.WalletService(
   walletServiceUrl,
-  grpc.credentials.createInsecure()
+  getCredentials(walletServiceUrl)
 );
 
 // ─── Helper: promisify gRPC call ─────────────────────────────────────────────
