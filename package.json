@@ -14,9 +14,9 @@
     "build:wallet": "npm run generate && nest build wallet-service",
     "migrate": "prisma migrate dev --schema=packages/prisma/schema.prisma",
     "migrate:deploy": "prisma migrate deploy --schema=packages/prisma/schema.prisma",
-    "generate": "prisma generate --schema=packages/prisma/schema.prisma",
-    "db:push": "prisma db push --schema=packages/prisma/schema.prisma",
-    "db:studio": "prisma studio --schema=packages/prisma/schema.prisma"
+    "generate": "npx prisma generate --schema=packages/prisma/schema.prisma",
+    "db:push": "npx prisma db push --schema=packages/prisma/schema.prisma",
+    "db:studio": "npx prisma studio --schema=packages/prisma/schema.prisma"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.10.6",
@@ -31,13 +31,13 @@
     "pino-http": "^9.0.0",
     "pino-pretty": "^11.0.0",
     "reflect-metadata": "^0.2.0",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "prisma": "^5.11.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.3.2",
     "@nestjs/schematics": "^10.1.1",
     "@types/node": "^20.12.5",
-    "prisma": "^5.11.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   }
