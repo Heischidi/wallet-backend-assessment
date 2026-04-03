@@ -33,7 +33,14 @@ const walletProto = grpc.loadPackageDefinition(walletPackageDef).wallet as any;
 
 // In production on render, these will be set to the Render URLs via Vercel env vars
 // Note: We strip 'https://' because gRPC expects a raw hostname
-const formatUrl = (url: string) => url.replace("https://", "").replace("http://", "");
+// Also, for Render, we must use port 443 for the public HTTPS endpoint
+const formatUrl = (url: string) => {
+  let cleaned = url.replace("https://", "").replace("http://", "");
+  if (cleaned.includes("onrender.com") && !cleaned.includes(":")) {
+    cleaned += ":443";
+  }
+  return cleaned;
+};
 
 const userServiceUrl = formatUrl(process.env.USER_SERVICE_URL || "127.0.0.1:5001");
 const walletServiceUrl = formatUrl(process.env.WALLET_SERVICE_URL || "127.0.0.1:5002");
