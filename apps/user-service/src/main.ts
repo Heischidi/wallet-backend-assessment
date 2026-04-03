@@ -14,7 +14,7 @@ async function bootstrap() {
       options: {
         package: 'user',
         protoPath: join(__dirname, '../../../packages/proto/user.proto'),
-        url: `0.0.0.0:${process.env.USER_SERVICE_PORT || 5001}`,
+        url: `0.0.0.0:${process.env.PORT || process.env.USER_SERVICE_PORT || 5001}`,
       },
     },
   );
@@ -30,7 +30,7 @@ async function bootstrap() {
   );
 
   await app.listen();
-  console.log(`🚀 User Service is running on port ${process.env.USER_SERVICE_PORT || 5001}`);
+  console.log(`🚀 User Service is running on port ${process.env.PORT || process.env.USER_SERVICE_PORT || 5001}`);
 }
 
 bootstrap();

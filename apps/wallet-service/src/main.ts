@@ -14,7 +14,7 @@ async function bootstrap() {
       options: {
         package: 'wallet',
         protoPath: join(__dirname, '../../../packages/proto/wallet.proto'),
-        url: `0.0.0.0:${process.env.WALLET_SERVICE_PORT || 5002}`,
+        url: `0.0.0.0:${process.env.PORT || process.env.WALLET_SERVICE_PORT || 5002}`,
       },
     },
   );
@@ -30,7 +30,7 @@ async function bootstrap() {
   );
 
   await app.listen();
-  console.log(`💰 Wallet Service is running on port ${process.env.WALLET_SERVICE_PORT || 5002}`);
+  console.log(`💰 Wallet Service is running on port ${process.env.PORT || process.env.WALLET_SERVICE_PORT || 5002}`);
 }
 
 bootstrap();

@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: user-service
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: node dist/apps/user-service/main
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: NODE_ENV
+        value: production
+
+  - type: web
+    name: wallet-service
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: node dist/apps/wallet-service/main
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: USER_SERVICE_URL
+        sync: false # Set this to the user-service Render URL (e.g. user-service-xyz.onrender.com:443)
+      - key: NODE_ENV
+        value: production
